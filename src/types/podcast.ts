@@ -1,3 +1,5 @@
+export type EpisodeFormat = 'debate' | 'interview' | 'storytelling';
+
 export interface DialogueLine {
   speaker: 'Host' | 'Guest';
   text: string;
@@ -12,5 +14,6 @@ export interface ResearchResult {
 
 export interface Episode {
   topic: string;
+  format: EpisodeFormat;
   dialogue: DialogueLine[];
 }

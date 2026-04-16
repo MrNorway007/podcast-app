@@ -2,8 +2,20 @@
 
 import { useState, useTransition } from 'react';
 import { generateEpisode } from '@/app/actions';
-import type { DialogueLine } from '@/types/podcast';
+import type { DialogueLine, EpisodeFormat } from '@/types/podcast';
 import PodcastPlayer from './PodcastPlayer';
+
+const FORMAT_LABELS: Record<EpisodeFormat, string> = {
+  debate: 'Debate',
+  interview: 'Interview',
+  storytelling: 'Storytelling',
+};
+
+const FORMAT_DESCRIPTIONS: Record<EpisodeFormat, string> = {
+  debate: 'Hosts take opposing sides and challenge each other',
+  interview: 'Deep-dive Q&A between curious host and expert',
+  storytelling: 'Collaborative narrative weaving facts into a story',
+};
 
 function SkeletonLoader() {
   return (
@@ -56,16 +68,19 @@ function SkeletonLoader() {
 
 export function GeneratorForm() {
   const [dialogue, setDialogue] = useState<DialogueLine[] | null>(null);
+  const [format, setFormat] = useState<EpisodeFormat | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (formData: FormData) => {
     setError(null);
     setDialogue(null);
+    setFormat(null);
     startTransition(async () => {
       try {
         const result = await generateEpisode(formData);
-        setDialogue(result);
+        setDialogue(result.dialogue);
+        setFormat(result.format);
       } catch (e) {
         setError(e instanceof Error ? e.message : 'Failed to generate episode');
       }
@@ -100,7 +115,19 @@ export function GeneratorForm() {
 
       {isPending && <SkeletonLoader />}
 
-      {dialogue && !isPending && <PodcastPlayer dialogue={dialogue} />}
+      {dialogue && format && !isPending && (
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-medium uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-3 py-1 rounded-full">
+              {FORMAT_LABELS[format]}
+            </span>
+            <span className="text-xs text-zinc-500">
+              {FORMAT_DESCRIPTIONS[format]}
+            </span>
+          </div>
+          <PodcastPlayer dialogue={dialogue} />
+        </div>
+      )}
     </div>
   );
 }
