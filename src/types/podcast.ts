@@ -1,4 +1,12 @@
-export type EpisodeFormat = 'debate' | 'interview' | 'storytelling';
+export type EpisodeFormat =
+  | 'classic-interview'
+  | 'friendly-debate'
+  | 'investigative-deep-dive'
+  | 'casual-coffee-chat'
+  | 'educational-explainer'
+  | 'futurist-vision'
+  | 'storytelling-narrative'
+  | 'breaking-news-analysis';
 
 export interface DialogueLine {
   speaker: 'Host' | 'Guest';

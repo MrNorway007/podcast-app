@@ -6,15 +6,25 @@ import type { DialogueLine, EpisodeFormat } from '@/types/podcast';
 import PodcastPlayer from './PodcastPlayer';
 
 const FORMAT_LABELS: Record<EpisodeFormat, string> = {
-  debate: 'Debate',
-  interview: 'Interview',
-  storytelling: 'Storytelling',
+  'classic-interview': 'Interview',
+  'friendly-debate': 'Debate',
+  'investigative-deep-dive': 'Investigative',
+  'casual-coffee-chat': 'Casual Chat',
+  'educational-explainer': 'Explainer',
+  'futurist-vision': 'Futurist',
+  'storytelling-narrative': 'Storytelling',
+  'breaking-news-analysis': 'Breaking News',
 };
 
 const FORMAT_DESCRIPTIONS: Record<EpisodeFormat, string> = {
-  debate: 'Hosts take opposing sides and challenge each other',
-  interview: 'Deep-dive Q&A between curious host and expert',
-  storytelling: 'Collaborative narrative weaving facts into a story',
+  'classic-interview': 'Deep-dive Q&A between curious journalist and domain expert',
+  'friendly-debate': 'Spirited point-counterpoint between two opposing perspectives',
+  'investigative-deep-dive': 'Dramatic uncovering of hidden facts with an insider source',
+  'casual-coffee-chat': 'Relaxed, humorous conversation between knowledgeable friends',
+  'educational-explainer': 'Clear step-by-step breakdown with vivid analogies',
+  'futurist-vision': 'Bold speculation about where things are heading next',
+  'storytelling-narrative': 'Cinematic narrative weaving lived experiences into insight',
+  'breaking-news-analysis': 'Fast-paced live analysis as events unfold in real time',
 };
 
 function SkeletonLoader() {

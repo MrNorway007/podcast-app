@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@andresaya/edge-tts": "^1.8.0",
-    "@anthropic-ai/sdk": "^0.89.0",
+    "ai": "^6.0.168",
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4"
